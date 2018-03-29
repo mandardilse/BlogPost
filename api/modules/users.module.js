@@ -13,7 +13,7 @@ router.post('/login', async (req,res)=>{
 router.post('/register', async(req,res)=>{
 	var formData = req.body
 	console.log(formData)
-	var user = await userModel.findOne({email:formData.email})
+	var user = await userModel.findOne({user_id:formData.user_id})
 	if(!user){
 		user = new userModel(formData)
 		user.save((err,result)=>{

@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.bodycontainer{
+	margin-top: 6%;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 30px;
+	line-height: 30px; /* Vertically center the text there */
+	background-color: #ccc;
+	color: black;
+}
+  .footer > .container {
+	padding-right: 15px;
+	padding-left: 15px;
+}

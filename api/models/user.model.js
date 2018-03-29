@@ -3,46 +3,32 @@ const schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
 const userSchema = new schema({
-	first_name: String,
+	first_name: {type: String, min:1, max: 255},
 	middle_name: {type: String, default: null},
-	last_name: String,
+	last_name: {type: String, min:1, max: 255},
 	date_of_birth: {type: Date, default: null},
-	user_id: String,
-	pwd: String,
-	organisation:[{
-		name:String,
-		org_type:String,
-		title:String,
-		address: [{
-			details:String,
-			city:String,
-			state: String,
-			country:String,
-			zipcode:String
-		}],
-		contacts:[{
-			emails:[String],
-			phones:[String]
-		}]
-	}],
+	user_id: {type: String, min:1, max: 255},
+	pwd: {type: String, min:1, max: 255},
+	organisation:[{type: schema.Types.ObjectId, ref:'UserOrganisations'}],
 	address:[{
-		details:String,
+		details:{type: String, min:1},
 		city:String,
 		state:String,
 		country:String,
-		zipcode:String
+		zipcode:{type:Number, default:0}
 	}],
 	contacts:[{
-		emails:[String],
-		phones:[String]
+		emails:[{type: String, min:1, max: 255}],
+		phones:[{type: String, min:1, max: 20},]
 	}],
-	relationship:String,
+	relationship:{type: String, min:1, max: 255},
 	AllowMultipleLogin:{type:Boolean, default:false},
-	Roles:[String],
+	Roles:[{type:schema.Types.ObjectId, ref:'Role'}],
 	Previllages:[{
 		key:String,
 		value:String
-	}]
+	}],
+	isactive:{type: Boolean, default:false}
 })
 
 userSchema.pre('save',function(next){
